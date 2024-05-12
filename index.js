@@ -1,16 +1,17 @@
-function numDecodings(s) {
-  const dp = new Array(s.length + 1).fill(0);
-  dp[0] = 1;
-  dp[1] = s[0] === "0" ? 0 : 1;
-  for (let i = 2; i <= s.length; i++) {
-    const oneDigit = parseInt(s.substring(i - 1, i));
-    const twoDigits = parseInt(s.substring(i - 2, i));
-    if (oneDigit >= 1) {
-      dp[i] += dp[i - 1];
+function countAndSay(n) {
+  let result = "1";
+  for (let i = 1; i < n; i++) {
+    let temp = "";
+    let count = 1;
+    for (let j = 0; j < result.length; j++) {
+      if (result[j] === result[j + 1]) {
+        count++;
+      } else {
+        temp += count + result[j];
+        count = 1;
+      }
     }
-    if (twoDigits >= 10 && twoDigits <= 26) {
-      dp[i] += dp[i - 2];
-    }
+    result = temp;
   }
-  return dp[s.length];
+  return result;
 }
