@@ -1,10 +1,10 @@
-function mergeKLists(lists) {
-  if (lists.length === 0) return null;
-  while (lists.length > 1) {
-    const first = lists.shift();
-    const second = lists.shift();
-    const merged = mergeTwoLists(first, second);
-    lists.push(merged);
+function rob(nums) {
+  let prevMax = 0;
+  let currMax = 0;
+  for (const num of nums) {
+    const temp = currMax;
+    currMax = Math.max(prevMax + num, currMax);
+    prevMax = temp;
   }
-  return lists[0];
+  return currMax;
 }
